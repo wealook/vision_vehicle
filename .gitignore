@@ -1,0 +1,11 @@
+build/
+samples
+.DS_Store
+.vscode
+out
+buildforjingshi
+sdk/python/imgs/
+.vs/*
+build-*/
+.idea
+cmake-build-*/

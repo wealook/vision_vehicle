@@ -1,0 +1,212 @@
+MP4v2 2.1.3 Release Notes
+*************************
+
+1 What's New?
+MP4v2 v2.1.3
+MP4v2 v2.1.2
+MP4v2 v2.1.1
+MP4v2 v2.1
+Appendix A Changelog
+A.1 Version 2.1
+A.2 Version 2.0
+A.3 Version 1.9
+A.4 Version 1.6
+Appendix B SCM repository details
+1 What's New?
+*************
+
+MP4v2 v2.1.3
+============
+
+Version 2.1.3 fixes several stability issues, including the following
+CVEs:
+
+   - https://nvd.nist.gov/vuln/detail/CVE-2023-29584
+   - https://nvd.nist.gov/vuln/detail/CVE-2023-1451
+   - https://nvd.nist.gov/vuln/detail/CVE-2023-1450
+
+The 2.1.3 update also fixes a performance issue when operating on files
+with unusually large chunks (containing thousands or even millions of
+samples instead of the usual few dozen).
+
+MP4v2 v2.1.2
+============
+
+Version 2.1.2 fixes build system issues, mainly in the CMake build
+system support.  This release also fixes a file seeking issue observed
+on Windows when compiled with _WIN32_WINNT < 0x600 and linked against
+modern CRT DLLs.  In addition, two minor issues related to data handling
+are fixed.
+
+MP4v2 v2.1.1
+============
+
+Version 2.1.1 fixes a type mismatch preventing MP4v2 from compiling on
+32 bit systems.
+
+MP4v2 v2.1
+==========
+
+Version 2.1 updates the existing build systems and adds support for
+building with CMake and Xcode.  It also fixes compilation with newer
+compilers and integrates smaller improvements and bug fixes from various
+MP4v2 forks.
+
+Appendix A Changelog
+********************
+
+A.1 Version 2.1
+===============
+
+  1. API changes:
+
+        - Added public API functions MP4ReadCallbacks,
+          MP4CreateCallbacks[Ex] and MP4ModifyCallbacks[Ex] to allow
+          working with custom I/O routines and memory buffers.
+
+        - Added public API function MP4FreeH264SeqPictHeaders to free
+          memory allocated by MP4GetTrackH264SeqPictHeaders.
+
+  2. General improvements:
+
+        - I/O system:
+
+             - Switched to ANSI C file I/O on Windows for improved
+               performance with large files.
+
+             - Handle extended paths (prefixed with \\?\ or \\?\UNC\) on
+               Windows.
+
+        - MP4Modify behavior:
+
+             - Attempt to truncate files if when modify reduces their
+               size instead of filling space with a free atom.
+
+             - Attempt to keep moov atom at the start of the file if it
+               does not increase in size.
+
+             - Do not leave empty mdat atoms behind after modify.
+
+  3. Tools improvements:
+
+        - Write total length and additonal metadata to .chapters.txt
+          files when exporting chapters with mp4chaps.
+
+        - Added options for modifying sort tags (sortartist, sortname
+          etc.)  to mp4tags.
+
+  4. Documentation improvements:
+
+        - Converted old API documentation man pages to Doxygen comments
+          in the public header files.
+
+  5. Build system improvements:
+
+        - Updated the Autotools build system:
+
+             - Fixed building as a shared library on Windows.
+
+             - Added support for pkg-config.
+
+        - Added support for building with CMake.
+
+        - Upgraded Visual Studio solution and projects for Visual Studio
+          2022.
+
+        - Added Xcode project files.
+
+  6. Bug fixes:
+
+        - Fixed issues handling files with sample times exceeding 2^32.
+
+        - Fixed compile errors and warnings with newer versions of
+          GCC/Clang.
+
+  7. Vulnerability fixes:
+
+        - https://nvd.nist.gov/vuln/detail/CVE-2018-14054
+        - https://nvd.nist.gov/vuln/detail/CVE-2018-14325
+        - https://nvd.nist.gov/vuln/detail/CVE-2018-14326
+        - https://nvd.nist.gov/vuln/detail/CVE-2018-14379
+        - https://nvd.nist.gov/vuln/detail/CVE-2018-14403
+        - https://nvd.nist.gov/vuln/detail/CVE-2018-14446
+        - https://nvd.nist.gov/vuln/detail/CVE-2018-17235
+        - https://nvd.nist.gov/vuln/detail/CVE-2018-17236
+
+A.2 Version 2.0
+===============
+
+  1. Removed deprecated metadata/free-form API and replaced with iTMF
+     Generic and Tags API.
+
+  2. Added new public-API: MP4SetLogCallback().
+
+A.3 Version 1.9
+===============
+
+  1. Renamed public API top-level header to '<mp4v2/mp4v2.h>' and added
+     namespaces for implementation (private) symbols.  Only public API
+     symbols are exported for dynamic (shared) or DLL libraries.  All
+     other symbols are now private, notwithstanding static-library
+     usage.
+
+  2. Added initial AC3 support.
+
+  3. Added native Windows port.  The port targets 'WINVER 0x0500' which
+     is Windows 2000 or higher.
+
+  4. Added QuickTime and Nero chapter support.  See 'mp4chaps'
+     command-line utility.
+     Contributed by Ullrich Pollähne <u.pollaehne@gmail.com>.
+
+  5. Enhanced 'mp4art' to support multiple cover-art atoms.
+
+  6. Dropped 'mp4dump' and replaced with 'mp4file' which supports
+     general file operations.
+
+  7. Added 'mp4track' with colr-box and pasp-box support.
+
+  8. Fixed corruption of udta.name atom during read-in.
+
+  9. Enhanced 'mp4file --dump' to show hexdump-style canonical hex+ASCII
+     data.
+
+  10. Enhanced 'mp4file --dump' to show human-readble value for tag
+     typeCode values.
+
+  11. Enhanced 'mp4file --dump' to show human-readble value for
+     ISO-639-2/T language codes.
+
+  12. Added new public-API: MP4GetTrackLanguage().
+
+  13. Added new public-API: MP4SetTrackLanguage().
+
+  14. Added support for GCC precompiled-headers on various *nix
+     platforms to speed up builds as we are using quite a few C++
+     headers.
+
+  15. Enhanced 'mp4track' to facilitate modification of { enabled,
+     inmovie, inpreview, altgroup, volume, width, height, language,
+     hdlrname, udtaname } properties.
+
+  16. Added new public-API: MP4GetTrackDurationPerChunk().
+
+  17. Added new public-API: MP4SetTrackDurationPerChunk() to override
+     default per-track chunk duration.
+
+  18. Added new public-API: MP4WriteSampleDependency().
+
+  19. Replaced (undocumented) public-API: MP4CreateEx() with
+     MP4CreateProvider().
+
+  20. Added new public-API for iTMF Generic functionality.
+
+A.4 Version 1.6
+===============
+
+  1. Branched libmp4v2 module from mpeg4ip project version 1.6.1.
+
+Appendix B SCM repository details
+*********************************
+
+     url:  git@github.com:enzo1982/mp4v2.git

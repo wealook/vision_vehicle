@@ -1,0 +1,6 @@
+rtcServer: "webrtc://127.0.0.1/live/livestream"
+srsServer: "http://127.0.0.1:1985"
+basePort: 20000
+saveBasePath: "./capture"
+saveFileMinSpaceSize: 1073741824
+detectionModelDir: "./model_det"

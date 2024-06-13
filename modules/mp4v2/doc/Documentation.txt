@@ -1,0 +1,39 @@
+MP4v2 2.1.3 Documentation
+*************************
+
+Introduction
+============
+
+Project MP4v2 consists of a C-library and various command-line utilities
+which permit creation and modification of MP4 files as defined by as
+defined by 'ISO base media file format', document number 'ISO/IEC
+14496-12:2005(E)'.
+
+Official website
+================
+
+The official website (https://mp4v2.org) makes various downloads
+(https://github.com/enzo1982/releases) available and archives online
+browesable documentation for releases, including API Reference.
+
+Issues and discussions
+======================
+
+Bug reports and feature requests can be submitted to the issue tracker
+(https://github.com/enzo1982/issues).  Questions and general feedback
+may be posted to the discussion
+(https://github.com/enzo1982/discussions) board.
+
+Articles
+********
+
+See Release Notes ('doc/ReleaseNotes.txt')
+See Building the Source ('doc/BuildSource.txt')
+See Building the Repository ('doc/BuildRepository.txt')
+See Authors ('doc/Authors.txt')
+
+Guides
+******
+
+See Command-line Tools Guide ('doc/ToolGuide.txt')
+

@@ -1,0 +1,6 @@
+add_subdirectory(CommonUtils)
+add_subdirectory(CameraCapture)
+add_subdirectory(rkde)
+add_subdirectory(rk_npu_inference)
+add_subdirectory(dma_alloc)
+add_subdirectory(mp4v2)
